@@ -1,0 +1,21 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: sanjacob/country-iso@master
+        with:
+          name: Mexico
+          locale: en  
+      - name: Check the code
+        run: echo "${{ steps.country.outputs.iso-2 }}"
+      - name: Check if code is correct
+        if: steps.country.outputs.iso-2 != "MX"
+        run: exit 1
