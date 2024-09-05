@@ -17,5 +17,5 @@ jobs:
       - name: Check the code
         run: echo "${{ steps.country.outputs.iso-2 }}"
       - name: Check if code is correct
-        if: steps.country.outputs.iso-2 != "MX"
+        if: ${{ steps.country.outputs.iso-2 != 'MX' }}
         run: exit 1
