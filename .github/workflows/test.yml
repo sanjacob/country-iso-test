@@ -14,7 +14,6 @@ jobs:
         id: country
         with:
           name: Mexico
-          locale: en  
       - name: Check the code
         run: echo "${{ steps.country.outputs.iso-2 }}"
       - name: Check if code is correct
