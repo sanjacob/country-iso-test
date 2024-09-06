@@ -14,8 +14,19 @@ jobs:
         id: country
         with:
           name: Mexico
-      - name: Check the code
-        run: echo "${{ steps.country.outputs.iso-2 }}"
-      - name: Check if code is correct
+      - name: Check the outputs
+        run: |
+          echo "${{ steps.country.outputs.iso-2 }}"
+          echo "${{ steps.country.outputs.iso-3 }}"
+          echo "${{ steps.country.outputs.name }}"
+          echo "${{ steps.country.outputs.native }}"
+          echo "${{ steps.country.outputs.continent }}"
+      - name: Check if iso-2 is correct
         if: ${{ steps.country.outputs.iso-2 != 'MX' }}
+        run: exit 1
+      - name: Check if iso-3 is correct
+        if: ${{ steps.country.outputs.iso-3 != 'MEX' }}
+        run: exit 1
+      - name: Check if continent is correct
+        if: ${{ steps.country.outputs.continent != 'NA' }}
         run: exit 1
